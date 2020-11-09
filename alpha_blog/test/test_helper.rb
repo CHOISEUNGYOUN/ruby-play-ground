@@ -1,6 +1,6 @@
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rails/test_help'
+ENV["RAILS_ENV"] ||= "test"
+require_relative "../config/environment"
+require "rails/test_help"
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
@@ -10,4 +10,8 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def sign_in_as(user)
+    post login_path, params: { session: { email: user.email, password: "password" } }
+  end
 end
