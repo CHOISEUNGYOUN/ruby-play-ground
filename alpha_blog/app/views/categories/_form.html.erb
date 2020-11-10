@@ -17,7 +17,7 @@
     </div>
     <div class="mb-3">
       <div class="form-group row justify-content-center">
-        <%= link_to "[ Cancel and return to articles listing ]", articles_path, class: "text-center text-info" %>
+        <%= link_to "[ Cancel and return to category ]", @category.valid? ? category_path : categories_path, class: "text-center text-info" %>
       </div>
     </div>
   </div>
