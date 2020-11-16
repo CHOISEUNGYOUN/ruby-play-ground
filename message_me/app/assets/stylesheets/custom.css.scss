@@ -3,3 +3,23 @@
 .chatbox {
   height: 450px;
 }
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.mb-8 {
+  margin: 2rem;
+}
+
+.text-5xl {
+  font-size: 3rem !important;
+}
