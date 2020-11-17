@@ -22,6 +22,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.x'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'bcrypt', '~> 3.1.7'
+gem 'hirb'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'semantic-ui-sass'
