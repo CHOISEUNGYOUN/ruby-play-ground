@@ -9,7 +9,7 @@
       <div class="content">
         <div class="ui feed">
           <% @messages.each do |message| %>
-            <%= render "messages/message", message: message %>
+            <%= render partial: "messages/message", locals: { message: message } %>
           <% end %>
         </div>
       </div>
