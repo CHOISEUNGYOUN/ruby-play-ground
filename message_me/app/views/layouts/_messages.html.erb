@@ -1,15 +1,15 @@
 <div class="container">
   <% flash.each do |name, msg| %>
-    <% if name == "notice" %>
+    <% if name == "notice" || name == "success" %>
       <% attr = "success" %>
     <% else %>
-      <% attr = "warning" %>
+      <% attr = "negative" %>
     <% end %>
-    <div class="alert alert-<%= attr %> alert-dismissible fade show" role="alert">
-      <%= msg %>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div class="ui message <%= attr %>" role="alert">
+      <i class="close icon"></i>
+      <div class="header">
+        <%= msg %>
+      </div>
     </div>
   <% end %>
 </div>
