@@ -7,7 +7,7 @@
   <div class="twelve wide column">
     <div class="ui fluid raised card chatbox">
       <div class="content">
-        <div class="ui feed">
+        <div class="ui feed" id="message-container">
           <% @messages.each do |message| %>
             <%= render partial: "messages/message", locals: { message: message } %>
           <% end %>
@@ -16,7 +16,7 @@
       <div class="extra content">
         <%= form_for(@message,
                      html: { class: "ui reply form", role: "form" },
-                     url: message_path) do |f| %>
+                     url: message_path, remote: true) do |f| %>
           <div class="field">
             <div class="ui fluid icon input">
               <%= f.text_field :body %>
