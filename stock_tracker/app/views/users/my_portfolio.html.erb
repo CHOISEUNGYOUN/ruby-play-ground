@@ -5,10 +5,10 @@
   <%= form_tag [:search, :stock], remote: true, method: :get do %>
     <div class="form-group row">
       <div class="col-sm-6 pr-0">
-        <%= text_field_tag :stock, params[:stock], 
-        placeholder: "Stock ticker symbol", 
-        autofocus: true, 
-        class: "form-control form-control-lg" %>
+        <%= text_field_tag :stock, params[:stock],
+                           placeholder: "Stock ticker symbol",
+                           autofocus: true,
+                           class: "form-control form-control-lg" %>
       </div>
       <div class="col-sm-3">
         <%= button_tag type: :submit, class: "btn btn-success" do %>
@@ -20,3 +20,6 @@
 </div>
 <div id="results">
 </div>
+<% if @tracked_stocks.any? %>
+  <%= render "stock_table" %>
+<% end %>
