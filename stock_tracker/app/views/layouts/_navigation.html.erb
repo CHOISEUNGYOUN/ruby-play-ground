@@ -7,6 +7,9 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= "active" if current_page?(my_portfolio_path) %>">
+          <%= link_to "My Portfolio", my_portfolio_path, class: "nav-link" %>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown
@@ -22,10 +25,24 @@
           </div>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <% if !current_page?(user_session_path) && !current_page?(new_user_registration_path) %>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <% if user_signed_in? %>
+              <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-xs mr-1" %>
+            <% else %>
+              <%= link_to "Sign in", user_session_path, class: "btn btn-xs btn-outline-info" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-xs btn-outline-info mr-1" %>
+            <% end %>
+          </li>
+        </ul>
+        <% if user_signed_in? %>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </nav>
