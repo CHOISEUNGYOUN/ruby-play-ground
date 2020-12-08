@@ -27,9 +27,12 @@
       </ul>
       <% if !current_page?(user_session_path) && !current_page?(new_user_registration_path) %>
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item mt-2 pr-2">
+            <%= fa_icon "user" %> <%= current_user&.full_name %>
+          </li>
           <li class="nav-item">
             <% if user_signed_in? %>
-              <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-xs mr-1" %>
+              <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-xs btn-outline-info mr-1" %>
             <% else %>
               <%= link_to "Sign in", user_session_path, class: "btn btn-xs btn-outline-info" %>
               <%= link_to "Sign up", new_user_registration_path, class: "btn btn-xs btn-outline-info mr-1" %>
