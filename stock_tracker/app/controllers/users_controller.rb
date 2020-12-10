@@ -8,6 +8,26 @@ class UsersController < ApplicationController
     @friends = current_user.friends
   end
 
+  def follow
+  end
+
+  def search
+    @friends = User.where(
+      "email LIKE ? OR first_name LIKE ? OR last_name LIKE ?",
+      "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%"
+    )
+    if @friends.present?
+      respond_to do |format|
+        format.js { render partial: "friends/result" }
+      end
+    else
+      respond_to do |format|
+        flash.now[:alert] = "no result found"
+        format.js { render partial: "friends/result" }
+      end
+    end
+  end
+
   def unfriend
     @friend = Friendship.find_by(user: current_user, friend: params[:id])
     @friend.destroy

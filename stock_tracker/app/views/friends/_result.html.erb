@@ -1,0 +1,23 @@
+<div class="results-block">
+  <%= render "layouts/message" %>
+</div>
+
+<% if @friends.any? %>
+  <% @friends.each do |friend| %>
+    <div class="d-inline-block card card-header results-block">
+      <strong>Email: </strong> <%= friend&.email %>
+      <strong>First Name: </strong> <%= friend&.first_name %>
+      <strong>Last Name: </strong> <%= friend&.last_name %>
+      <% if current_user.friends.exclude?(friend) %>
+        <%= link_to "Follow",
+                    follow_path(friend),
+                    class: "btn btn-xs btn-success ml-3",
+                    method: :post %>
+      <% else %>
+        <span class="badge badge-secondary ml-3">
+          You are already following
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
