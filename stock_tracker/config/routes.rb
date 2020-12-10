@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   root "home#index"
   get "my_portfolio", to: "users#my_portfolio"
   get "search_stock", to: "stocks#search"
+  get "my_friends", to: "users#my_friends"
+  delete "my_friends/:id", to: "users#unfriend", as: :unfriend
 end

@@ -19,6 +19,9 @@
               <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
                 <%= fa_icon "edit" %> Edit profile
               <% end %>
+              <%= link_to my_friends_path, class: "dropdown-item" do %>
+                <%= fa_icon "users" %> My friends
+              <% end %>
             <% else %>
               <%= link_to "Sign in", user_session_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
