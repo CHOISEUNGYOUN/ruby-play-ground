@@ -8,6 +8,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  scope :search_friend, ->(q) {
+          where(
+            "email LIKE ? OR first_name LIKE ? OR last_name LIKE ?",
+            "%#{q}%", "%#{q}%", "%#{q}%"
+          )
+        }
+
   def already_tracked?(ticker_symbol)
     stock = Stock.grab_stock(ticker_symbol).first
     return false unless stock

@@ -9,13 +9,15 @@ class UsersController < ApplicationController
   end
 
   def follow
+    @friend = User.find(params[:id])
+    current_user.friends << @friend
+    flash[:notice] = "#{@friend.first_name} was successfully added in your friend list!"
+    redirect_to my_friends_path
   end
 
   def search
-    @friends = User.where(
-      "email LIKE ? OR first_name LIKE ? OR last_name LIKE ?",
-      "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%"
-    )
+    @friends = User.search_friend(params[:q])
+
     if @friends.present?
       respond_to do |format|
         format.js { render partial: "friends/result" }
@@ -31,7 +33,7 @@ class UsersController < ApplicationController
   def unfriend
     @friend = Friendship.find_by(user: current_user, friend: params[:id])
     @friend.destroy
-    flash[:notice] = "#{@friend.friend.first_name} was successfully removed from your portfolio."
+    flash[:notice] = "#{@friend.friend.first_name} was successfully removed from your friend list."
     redirect_to my_friends_path
   end
 end
