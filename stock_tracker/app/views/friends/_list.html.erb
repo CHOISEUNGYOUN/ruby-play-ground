@@ -1,4 +1,4 @@
-<table class="col-sm-6 table table-bordered mt-5">
+<table class="col-sm-9 table table-bordered mt-5">
   <thead>
     <tr>
       <th scope="col">Email</th>
@@ -14,6 +14,7 @@
         <td><%= friend&.first_name %></td>
         <td><%= friend&.last_name %></td>
         <td>
+          <%= link_to "View profile", user_path(friend), class: "btn btn-sm btn-success" %>
           <%= link_to "Stop following",
                       unfriend_path(friend),
                       method: :delete,

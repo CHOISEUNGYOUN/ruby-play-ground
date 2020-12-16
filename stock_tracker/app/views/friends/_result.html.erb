@@ -1,23 +1,31 @@
 <div class="results-block">
   <%= render "layouts/message" %>
-</div>
-
-<% if @friends.any? %>
-  <% @friends.each do |friend| %>
+  <% if @friends.any? %>
     <div class="d-inline-block card card-header results-block">
-      <strong>Email: </strong> <%= friend&.email %>
-      <strong>First Name: </strong> <%= friend&.first_name %>
-      <strong>Last Name: </strong> <%= friend&.last_name %>
-      <% if current_user.friends.exclude?(friend) %>
-        <%= link_to "Follow",
-                    follow_path(friend),
-                    class: "btn btn-xs btn-success ml-3",
-                    method: :post %>
-      <% else %>
-        <span class="badge badge-secondary ml-3">
-          You are already following
-        </span>
-      <% end %>
+      <table class="col-md-12">
+        <tbody>
+          <% @friends.each do |friend| %>
+            <tr>
+              <td class="p-1"><strong>Email: </strong> <%= friend&.email %></td>
+              <td class="p-1"><strong>First Name: </strong> <%= friend&.first_name %></td>
+              <td class="p-1"><strong>Last Name: </strong> <%= friend&.last_name %></td>
+              <td class="p-1">
+                <%= link_to "View profile", user_path(friend), class: "btn btn-xs btn-success ml-3" %>
+                <% if current_user.friends.exclude?(friend) %>
+                  <%= link_to "Follow",
+                              follow_path(friend),
+                              class: "btn btn-xs btn-success ml-3",
+                              method: :post %>
+                <% else %>
+                  <span class="badge badge-secondary ml-3">
+                    You are already following
+                  </span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   <% end %>
-<% end %>
+</div>

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post "my_friends/:id", to: "users#follow", as: :follow
   delete "my_friends/:id", to: "users#unfriend", as: :unfriend
   get "search_friend", to: "users#search"
+  resources :users, only: [:show]
 end

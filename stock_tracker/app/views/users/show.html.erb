@@ -1,0 +1,36 @@
+<h2>User detail</h2>
+
+<div class="d-inline-block card card-header results-block">
+  <table class="col-md-12">
+    <tbody>
+      <tr>
+        <td class="p-1"><strong>Email: </strong> <%= @user&.email %></td>
+        <td class="p-1"><strong>First Name: </strong> <%= @user&.first_name %></td>
+        <td class="p-1"><strong>Last Name: </strong> <%= @user&.last_name %></td>
+        <td class="p-1">
+          <% if current_user.friends.exclude?(@user) %>
+            <%= link_to "Follow",
+                        follow_path(@user),
+                        class: "btn btn-sm btn-success ml-3",
+                        method: :post %>
+          <% else %>
+            <span class="badge badge-secondary ml-3">
+              You are already following
+            </span>
+            <%= link_to "Stop following",
+                        unfriend_path(@user),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" },
+                        class: "btn btn-sm btn-warning" %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<% if @tracked_stocks.any? %>
+  <%= render "stock_table" %>
+<% else %>
+  <p class="lead">This user is not tracking any stocks </p>
+<% end %>

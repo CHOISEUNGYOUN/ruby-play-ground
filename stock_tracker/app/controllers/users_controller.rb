@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     @friends = current_user.friends
   end
 
+  def show
+    @user = User.find(params[:id])
+    @tracked_stocks = @user.stocks
+  end
+
   def follow
     @friend = User.find(params[:id])
     current_user.friends << @friend
@@ -16,7 +21,14 @@ class UsersController < ApplicationController
   end
 
   def search
-    @friends = User.search_friend(params[:q])
+    if params[:q].blank?
+      respond_to do |format|
+        flash.now[:alert] = "input your keywords"
+        format.js { render partial: "friends/result" }
+      end
+    end
+
+    @friends = User.search_friend(params[:q]).without(current_user)
 
     if @friends.present?
       respond_to do |format|
