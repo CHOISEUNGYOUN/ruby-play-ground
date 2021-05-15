@@ -10,6 +10,8 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_secure_password
   
+  scope :only_active_users, -> { where(activated: true) }
+  
   class << self
     def digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -42,6 +44,14 @@ class User < ApplicationRecord
   
   def forget
     update_attribute(:remember_digest, nil)
+  end
+  
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+  
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
   end
   
   private
